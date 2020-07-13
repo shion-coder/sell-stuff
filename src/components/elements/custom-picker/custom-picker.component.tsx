@@ -2,11 +2,11 @@ import React, { FC, useState } from 'react';
 import { TouchableWithoutFeedback, Modal, FlatList, Button } from 'react-native';
 
 import Screen from 'components/screen';
+import PickerItem from './picker-item';
 
 import { Category } from 'types';
 
 import { Container, AppsIcon, DownIcon, Text } from './custom-picker.styles';
-import PickerItem from 'components/picker-item';
 
 /* -------------------------------------------------------------------------- */
 

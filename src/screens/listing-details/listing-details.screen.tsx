@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import ListItem from 'components/list-item';
+import { ListItem } from 'components/lists';
 
 import { Container, Image, Details, Title, Price, User } from './listing-details.styles';
 

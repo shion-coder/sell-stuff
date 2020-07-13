@@ -2,9 +2,7 @@ import React, { FC, useState } from 'react';
 import { FlatList } from 'react-native';
 
 import Screen from 'components/screen';
-import ListItem from 'components/list-item';
-import Separator from 'components/separator';
-import ListItemDelete from 'components/list-item-delete';
+import { ListItem, Separator, ListItemDelete } from 'components/lists';
 
 import { Message } from 'types';
 

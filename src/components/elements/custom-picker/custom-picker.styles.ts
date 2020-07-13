@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import CustomText from 'components/custom-text';
+import CustomText from 'components/elements/custom-text';
 
 /* -------------------------------------------------------------------------- */
 

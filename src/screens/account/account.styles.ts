@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import ListItem from 'components/list-item';
+import { ListItem } from 'components/lists';
 
 /* -------------------------------------------------------------------------- */
 

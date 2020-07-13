@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import CustomButton from 'components/custom-button';
+import { CustomButton } from 'components/elements';
 
 /* -------------------------------------------------------------------------- */
 

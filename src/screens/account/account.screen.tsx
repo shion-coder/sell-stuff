@@ -2,9 +2,8 @@ import React, { FC } from 'react';
 import { FlatList } from 'react-native';
 
 import Screen from 'components/screen';
-import ListItem from 'components/list-item';
 import Icon from 'components/icon';
-import Separator from 'components/separator';
+import { ListItem, Separator } from 'components/lists';
 
 import { theme } from 'styles';
 
@@ -49,7 +48,6 @@ const Account: FC = () => (
       </Box>
 
       <Logout IconComponent={<Icon name="logout" background={theme.colors.corn} />} />
-      <></>
     </Container>
   </Screen>
 );

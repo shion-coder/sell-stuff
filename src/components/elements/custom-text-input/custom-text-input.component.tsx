@@ -5,11 +5,11 @@ import { Container, TextInput, Icon } from './custom-text-input.styles';
 
 /* -------------------------------------------------------------------------- */
 
-interface Props extends TextInputProps {
+export interface CustomTextInputProps extends TextInputProps {
   icon?: string;
 }
 
-const CustomTextInput: FC<Props> = ({ icon, ...otherProps }) => (
+const CustomTextInput: FC<CustomTextInputProps> = ({ icon, ...otherProps }) => (
   <Container>
     {icon && <Icon name={icon} />}
 
