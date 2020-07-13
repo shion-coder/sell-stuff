@@ -1,21 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { FC, useState } from 'react';
+import { ThemeProvider } from 'styled-components/native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { theme } from 'styles';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+// import Welcome from 'screens/welcome';
+// import ListingDetails from 'screens/listing-details';
+// import Listings from 'screens/listings';
+// import Messages from 'screens/messages';
+// import Icon from 'components/icon';
+import Screen from 'components/screen';
+import CustomTextInput from 'components/custom-text-input';
+import CustomPicker from 'components/custom-picker';
+// import ListItem from 'components/list-item';
+// import Account from 'screens/account';
+
+/* -------------------------------------------------------------------------- */
+
+const categories = [
+  {
+    id: 1,
+    label: 'Furniture',
   },
-});
+  {
+    id: 2,
+    label: 'Clothing',
+  },
+  {
+    id: 3,
+    label: 'Camera',
+  },
+];
+
+const App: FC = () => {
+  const [category, setCategory] = useState(categories[0]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Screen>
+        <CustomPicker
+          items={categories}
+          icon="apps"
+          placeholder="Category"
+          selectedItem={category}
+          onSelectedItem={(item) => setCategory(item)}
+        />
+
+        <CustomTextInput icon="email" placeholder="Email" />
+      </Screen>
+    </ThemeProvider>
+  );
+};
+
+export default App;
