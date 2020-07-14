@@ -11,8 +11,11 @@ import { Message } from 'types';
 const dummyMessages: Message[] = [
   {
     id: 1,
-    title: 'T1',
-    description: 'D1',
+    title:
+      'Look at the color of the placeholder of the picker component. It’s darker than the placeholder of text inputs. Look at the color of the placeholder of the picker component. It’s darker than the placeholder of text inputs. Look at the color of the placeholder of the picker component. It’s darker than the placeholder of text inputs.',
+    description:
+      'Look at the color of the placeholder of the picker component. It’s darker than the placeholder of text inputs. Look at the color of the placeholder of the picker component. It’s darker than the placeholder of text inputs. Look at the color of the placeholder of the picker component. It’s darker than the placeholder of text inputs.',
+
     image: require('assets/images/mosh.jpg'),
   },
   {

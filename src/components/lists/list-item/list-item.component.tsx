@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { theme } from 'styles';
 
 import { TouchableHighlight, Container, Image, Details, Title, Description } from './list-item.styles';
 
@@ -24,10 +27,12 @@ const ListItem: FC<Props> = ({ style, image, title, description, IconComponent, 
         {image && <Image source={image} />}
 
         <Details>
-          <Title>{title}</Title>
+          <Title numberOfLines={1}>{title}</Title>
 
-          {description && <Description>{description}</Description>}
+          {description && <Description numberOfLines={2}>{description}</Description>}
         </Details>
+
+        <MaterialCommunityIcons name="chevron-right" color={theme.colors.medium} size={25} />
       </Container>
     </TouchableHighlight>
   </Swipeable>

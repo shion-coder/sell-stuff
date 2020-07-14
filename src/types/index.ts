@@ -1,3 +1,3 @@
 export * from './message';
 
-export * from './category';
+export * from './picker';

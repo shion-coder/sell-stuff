@@ -2,8 +2,9 @@ import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components/native';
 
 import { theme } from 'styles';
-import Register from 'screens/register';
 
+// import Register from 'screens/register';
+import ListingEdit from 'screens/listing-edit';
 // import Login from 'screens/login';
 // import Welcome from 'screens/welcome';
 // import ListingDetails from 'screens/listing-details';
@@ -49,7 +50,7 @@ const App: FC = () => {
 
         <CustomTextInput icon="email" placeholder="Email" />
       </Screen> */}
-      <Register />
+      <ListingEdit />
     </ThemeProvider>
   );
 };

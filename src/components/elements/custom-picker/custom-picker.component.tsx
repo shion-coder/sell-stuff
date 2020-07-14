@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback, Modal, FlatList, Button } from 'react-native'
 import Screen from 'components/screen';
 import PickerItem from './picker-item';
 
-import { Category } from 'types';
+import { Category, PickerProps } from 'types';
 
 import { Container, AppsIcon, DownIcon, Text } from './custom-picker.styles';
 
@@ -16,18 +16,30 @@ interface Props {
   placeholder?: string;
   selectedItem?: Category;
   onSelectedItem: (item: Category) => void;
+  PickerItemComponent?: FC<PickerProps>;
+  numColumns?: number;
+  width?: string | number;
 }
 
-const CustomPicker: FC<Props> = ({ items, icon, placeholder, selectedItem, onSelectedItem }) => {
+const CustomPicker: FC<Props> = ({
+  items,
+  icon,
+  placeholder,
+  selectedItem,
+  onSelectedItem,
+  PickerItemComponent = PickerItem,
+  numColumns = 1,
+  width,
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <Container>
+        <Container width={width}>
           {icon && <AppsIcon name={icon} />}
 
-          <Text>{selectedItem ? selectedItem.label : placeholder}</Text>
+          <Text isSelectedItem={!!selectedItem}>{selectedItem ? selectedItem.name : placeholder}</Text>
 
           <DownIcon />
         </Container>
@@ -40,9 +52,10 @@ const CustomPicker: FC<Props> = ({ items, icon, placeholder, selectedItem, onSel
           <FlatList
             data={items}
             keyExtractor={(item) => item.id.toString()}
+            numColumns={numColumns}
             renderItem={({ item }) => (
-              <PickerItem
-                label={item.label}
+              <PickerItemComponent
+                item={item}
                 onPress={() => {
                   setModalVisible(false);
                   onSelectedItem(item);

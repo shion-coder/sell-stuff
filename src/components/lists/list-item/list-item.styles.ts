@@ -15,6 +15,7 @@ export const TouchableHighlight = styled.TouchableHighlight.attrs(({ theme }) =>
 export const Container = styled.View<ContainerProps>`
   background-color: ${({ theme }) => theme.colors.white};
   flex-direction: row;
+  align-items: center;
   padding: 15px;
 `;
 
@@ -27,6 +28,7 @@ export const Image = styled.Image`
 export const Details = styled.View`
   margin-left: 10px;
   justify-content: center;
+  flex: 1;
 `;
 
 export const Title = styled(CustomText)`

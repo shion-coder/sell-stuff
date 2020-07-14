@@ -3,16 +3,20 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 /* -------------------------------------------------------------------------- */
 
-export const Container = styled.View`
+interface ContainerProps {
+  width?: string | number;
+}
+
+export const Container = styled.View<ContainerProps>`
   background-color: ${({ theme }) => theme.colors.light};
   border-radius: 25px;
   flex-direction: row;
-  width: 100%;
+  width: ${({ width }) => (typeof width === 'string' ? width : typeof width === 'number' ? width + 'px' : '100%')};
   padding: 15px;
   margin: 10px 0;
 `;
 
-export const TextInput = styled.TextInput`
+export const TextInput = styled.TextInput.attrs(({ theme }) => ({ placeholderTextColor: theme.colors.medium }))`
   font-size: ${({ theme }) => theme.text.size};
   font-family: ${({ theme }) => theme.text.family};
   width: 100%;
