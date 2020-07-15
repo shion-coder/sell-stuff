@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { theme } from 'styles';
-
 import { Container } from './icon.styles';
 
 /* -------------------------------------------------------------------------- */

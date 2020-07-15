@@ -3,7 +3,6 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { theme } from 'styles';
-
 import { TouchableHighlight, Container, Image, Details, Title, Description } from './list-item.styles';
 
 /* -------------------------------------------------------------------------- */

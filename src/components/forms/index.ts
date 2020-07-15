@@ -7,3 +7,5 @@ export { default as FormField } from './form-field';
 export { default as SubmitButton } from './submit-button';
 
 export { default as FormPicker } from './form-picker';
+
+export { default as FormImagePicker } from './form-image-picker';

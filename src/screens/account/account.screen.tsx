@@ -6,7 +6,6 @@ import Icon from 'components/icon';
 import { ListItem, Separator } from 'components/lists';
 
 import { theme } from 'styles';
-
 import { Container, User, Logout, Box } from './account.styles';
 
 /* -------------------------------------------------------------------------- */

@@ -2,9 +2,16 @@ import React, { FC } from 'react';
 import * as Yup from 'yup';
 
 import Screen from 'components/screen';
-import { CustomForm as Form, FormField as Field, FormPicker as Picker, SubmitButton as Submit } from 'components/forms';
+import {
+  CustomForm as Form,
+  FormField as Field,
+  FormPicker as Picker,
+  SubmitButton as Submit,
+  FormImagePicker,
+} from 'components/forms';
 import CategoryPicker from 'components/elements/custom-picker/category-picker';
 
+import { useLocation } from 'hooks';
 import { Category } from 'types';
 
 import { Container } from './listing-edit.styles';
@@ -12,6 +19,7 @@ import { Container } from './listing-edit.styles';
 /* -------------------------------------------------------------------------- */
 
 const validationSchema = Yup.object().shape({
+  images: Yup.array().min(1, 'Please select at least one image'),
   title: Yup.string().required().min(1).label('Title'),
   price: Yup.number().required().min(1).max(100000).label('Price'),
   description: Yup.string().label('Description'),
@@ -75,36 +83,43 @@ const categories: Category[] = [
   },
 ];
 
-const ListingEdit: FC = () => (
-  <Screen>
-    <Container>
-      <Form
-        initialValues={{
-          title: '',
-          price: '',
-          description: '',
-          category: null,
-        }}
-        onSubmit={(values) => console.log(values)}
-        validationSchema={validationSchema}>
-        <Field name="title" placeholder="Title" maxLength={255} />
+const ListingEdit: FC = () => {
+  const location = useLocation();
 
-        <Field name="price" placeholder="Price" keyboardType="numeric" maxLength={9} />
+  return (
+    <Screen>
+      <Container>
+        <Form
+          initialValues={{
+            images: [],
+            title: '',
+            price: '',
+            description: '',
+            category: null,
+          }}
+          onSubmit={(values) => console.log({ ...values, location })}
+          validationSchema={validationSchema}>
+          <FormImagePicker name="images" />
 
-        <Picker
-          items={categories}
-          name="category"
-          placeholder="Category"
-          PickerItemComponent={CategoryPicker}
-          numColumns={3}
-        />
+          <Field name="title" placeholder="Title" maxLength={255} />
 
-        <Field name="description" placeholder="Description" maxLength={255} numberOfLines={3} />
+          <Field name="price" placeholder="Price" keyboardType="numeric" maxLength={9} />
 
-        <Submit title="Post" />
-      </Form>
-    </Container>
-  </Screen>
-);
+          <Picker
+            items={categories}
+            name="category"
+            placeholder="Category"
+            PickerItemComponent={CategoryPicker}
+            numColumns={3}
+          />
+
+          <Field name="description" placeholder="Description" maxLength={255} numberOfLines={3} />
+
+          <Submit title="Post" />
+        </Form>
+      </Container>
+    </Screen>
+  );
+};
 
 export default ListingEdit;

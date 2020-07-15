@@ -13,6 +13,8 @@ interface TextProps {
   isSelectedItem: boolean;
 }
 
+const Icon = styled(MaterialCommunityIcons).attrs(({ theme }) => ({ size: 20, color: theme.colors.medium }))``;
+
 export const Container = styled.View<ContainerProps>`
   background-color: ${({ theme }) => theme.colors.light};
   border-radius: 25px;
@@ -26,8 +28,6 @@ export const Text = styled(CustomText)<TextProps>`
   flex: 1;
   color: ${({ isSelectedItem, theme }) => (isSelectedItem ? theme.colors.dark : theme.colors.medium)};
 `;
-
-const Icon = styled(MaterialCommunityIcons).attrs(({ theme }) => ({ size: 20, color: theme.colors.medium }))``;
 
 export const AppsIcon = styled(Icon)`
   margin-right: 10px;
