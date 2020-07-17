@@ -14,7 +14,7 @@ interface Props {
   description?: string;
   IconComponent?: JSX.Element;
   onPress?: () => void;
-  renderRightActions?: () => void;
+  renderRightActions?: () => JSX.Element;
 }
 
 const ListItem: FC<Props> = ({ style, image, title, description, IconComponent, onPress, renderRightActions }) => (

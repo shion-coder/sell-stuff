@@ -1,10 +1,18 @@
 import React, { FC } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+import { AuthStackParamList } from 'types';
+import { routes } from 'navigation/route';
 
 import { Background, LogoContainer, Logo, Tagline, ButtonContainer, Login, Register } from './welcome.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const Welcome: FC = () => (
+interface Props {
+  navigation: StackNavigationProp<AuthStackParamList, 'Welcome'>;
+}
+
+const Welcome: FC<Props> = ({ navigation }) => (
   <Background blurRadius={10} source={require('assets/images/background.jpg')}>
     <LogoContainer>
       <Logo source={require('assets/images/logo-red.png')} />
@@ -12,8 +20,8 @@ const Welcome: FC = () => (
     </LogoContainer>
 
     <ButtonContainer>
-      <Login />
-      <Register />
+      <Login onPress={() => navigation.navigate(routes.LOGIN)} />
+      <Register onPress={() => navigation.navigate(routes.REGISTER)} />
     </ButtonContainer>
   </Background>
 );

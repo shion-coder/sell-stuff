@@ -1,18 +1,25 @@
 import React, { FC } from 'react';
+import { RouteProp } from '@react-navigation/native';
 
 import { ListItem } from 'components/lists';
+
+import { FeedStackParamList } from 'types';
 
 import { Container, Image, Details, Title, Price, User } from './listing-details.styles';
 
 /* -------------------------------------------------------------------------- */
 
-const ListingDetails: FC = () => (
+interface Props {
+  route: RouteProp<FeedStackParamList, 'ListingDetails'>;
+}
+
+const ListingDetails: FC<Props> = ({ route: { params } }) => (
   <Container>
-    <Image source={require('assets/images/jacket.jpg')} />
+    <Image source={{ uri: params.images[0].url }} />
 
     <Details>
-      <Title>Red jacket for sale</Title>
-      <Price>$100</Price>
+      <Title>{params.title}</Title>
+      <Price>{params.price}</Price>
 
       <User>
         <ListItem image={require('assets/images/mosh.jpg')} title="Mosh Ham" description="5 Listings" />

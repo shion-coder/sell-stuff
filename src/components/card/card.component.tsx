@@ -1,24 +1,28 @@
 import React, { FC } from 'react';
 
 import { Container, Image, Details, Title, Description } from './card.styles';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 /* -------------------------------------------------------------------------- */
 
 interface Props {
-  image: any; //FIXME: Fix type any later
+  imageUrl: string;
   title: string;
   description: string;
+  onPress: () => void;
 }
 
-const Card: FC<Props> = ({ image, title, description }) => (
-  <Container>
-    <Image source={image} />
+const Card: FC<Props> = ({ imageUrl, title, description, onPress }) => (
+  <TouchableWithoutFeedback onPress={onPress}>
+    <Container>
+      <Image source={{ uri: imageUrl }} />
 
-    <Details>
-      <Title>{title}</Title>
-      <Description>{description}</Description>
-    </Details>
-  </Container>
+      <Details>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+      </Details>
+    </Container>
+  </TouchableWithoutFeedback>
 );
 
 export default Card;

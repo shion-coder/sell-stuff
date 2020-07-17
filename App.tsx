@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components/native';
+import { NavigationContainer } from '@react-navigation/native';
+
+import { AuthNavigator, navigationTheme, AppNavigator } from 'navigation';
 
 import { theme } from 'styles';
-
-import ListingEdit from 'screens/listing-edit';
 
 /* -------------------------------------------------------------------------- */
 
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <ListingEdit />
+      <NavigationContainer theme={navigationTheme}>
+        {/* <AuthNavigator /> */}
+        <AppNavigator />
+      </NavigationContainer>
     </ThemeProvider>
   );
 };

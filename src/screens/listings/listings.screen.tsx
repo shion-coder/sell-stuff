@@ -1,45 +1,60 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { FlatList } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import Screen from 'components/screen';
 import Card from 'components/card';
+import { CustomText, CustomButton } from 'components/elements';
+
+import { FeedStackParamList } from 'types';
+import { routes } from 'navigation/route';
+import { getListings, ListingItem } from 'api';
 
 import { Container } from './listings.styles';
+import ActivityIndicator from 'components/activity-indicator';
+import { useApi } from 'hooks';
 
 /* -------------------------------------------------------------------------- */
 
-interface Item {
-  id: number;
-  title: string;
-  price: number;
-  image: any; // FIXME: Fix type of any later
+interface Props {
+  navigation: StackNavigationProp<FeedStackParamList, 'Listings'>;
 }
 
-const listings: Item[] = [
-  {
-    id: 1,
-    title: 'Red jacket for sale',
-    price: 100,
-    image: require('assets/images/jacket.jpg'),
-  },
-  {
-    id: 2,
-    title: 'Couch in great condition',
-    price: 1000,
-    image: require('assets/images/couch.jpg'),
-  },
-];
+const Listings: FC<Props> = ({ navigation }) => {
+  const { data: listings, error, loading, request: loadListings } = useApi<ListingItem>(getListings);
 
-const Listings: FC = () => (
-  <Screen>
-    <Container>
-      <FlatList
-        data={listings}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <Card image={item.image} title={item.title} description={`$ ${item.price}`} />}
-      />
-    </Container>
-  </Screen>
-);
+  useEffect(() => {
+    loadListings();
+  }, []);
+
+  return (
+    <Screen>
+      <Container>
+        {error ? (
+          <>
+            <CustomText>Couldn't retrieve the listings.</CustomText>
+            <CustomButton title="Retry" onPress={loadListings} />
+          </>
+        ) : (
+          <>
+            <ActivityIndicator visible={loading} />
+            <FlatList
+              data={listings}
+              keyExtractor={(listing) => listing.id.toString()}
+              renderItem={({ item }) => (
+                <Card
+                  imageUrl={item.images[0].url}
+                  title={item.title}
+                  description={`$ ${item.price}`}
+                  onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+                />
+              )}
+            />
+          </>
+        )}
+      </Container>
+    </Screen>
+  );
+};
 
 export default Listings;
