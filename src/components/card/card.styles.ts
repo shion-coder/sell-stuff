@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Image as DefaultImage } from 'react-native-expo-image-cache';
 
 /* -------------------------------------------------------------------------- */
 
@@ -9,7 +10,7 @@ export const Container = styled.View`
   overflow: hidden;
 `;
 
-export const Image = styled.Image`
+export const Image = styled(DefaultImage)`
   width: 100%;
   height: 200px;
 `;

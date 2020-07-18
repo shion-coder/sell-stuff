@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 import Screen from 'components/screen';
@@ -13,8 +14,11 @@ import CategoryPicker from 'components/elements/custom-picker/category-picker';
 
 import { useLocation } from 'hooks';
 import { Category } from 'types';
+import { addListing, ListingPost } from 'api';
 
 import { Container } from './listing-edit.styles';
+import Upload from 'screens/upload';
+import { Alert } from 'react-native';
 
 /* -------------------------------------------------------------------------- */
 
@@ -85,10 +89,30 @@ const categories: Category[] = [
 
 const ListingEdit: FC = () => {
   const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (listing: ListingPost, formikHelpers: FormikHelpers<object>) => {
+    setProgress(0);
+    setUploadVisible(true);
+    const result = await addListing({ ...listing, location }, (progress) => setProgress(progress));
+
+    if (!result.ok) {
+      setError(true);
+      return Alert.alert('Error', 'Could not save the listing', [
+        { text: 'Ok', onPress: () => setUploadVisible(false) },
+      ]);
+    }
+
+    setError(false);
+    formikHelpers.resetForm();
+  };
 
   return (
     <Screen>
       <Container>
+        <Upload progress={progress} error={error} onDone={() => setUploadVisible(false)} visible={uploadVisible} />
         <Form
           initialValues={{
             images: [],
@@ -97,7 +121,7 @@ const ListingEdit: FC = () => {
             description: '',
             category: null,
           }}
-          onSubmit={(values) => console.log({ ...values, location })}
+          onSubmit={handleSubmit}
           validationSchema={validationSchema}>
           <FormImagePicker name="images" />
 

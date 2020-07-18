@@ -7,15 +7,16 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 interface Props {
   imageUrl: string;
+  thumbnailUrl: string;
   title: string;
   description: string;
   onPress: () => void;
 }
 
-const Card: FC<Props> = ({ imageUrl, title, description, onPress }) => (
+const Card: FC<Props> = ({ imageUrl, thumbnailUrl, title, description, onPress }) => (
   <TouchableWithoutFeedback onPress={onPress}>
     <Container>
-      <Image source={{ uri: imageUrl }} />
+      <Image preview={{ uri: thumbnailUrl }} tint="light" uri={imageUrl} />
 
       <Details>
         <Title>{title}</Title>

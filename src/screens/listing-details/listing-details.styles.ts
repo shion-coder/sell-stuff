@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Image as DefaultImage } from 'react-native-expo-image-cache';
 
 import { CustomText } from 'components/elements';
 
@@ -6,7 +7,7 @@ import { CustomText } from 'components/elements';
 
 export const Container = styled.View``;
 
-export const Image = styled.Image`
+export const Image = styled(DefaultImage)`
   width: 100%;
   height: 300px;
 `;

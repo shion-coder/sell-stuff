@@ -4,7 +4,7 @@ import * as Location from 'expo-location';
 /* -------------------------------------------------------------------------- */
 
 export const useLocation = () => {
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState<{ latitude: number; longitude: number }>();
 
   const getLocation = async () => {
     try {

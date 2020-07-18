@@ -15,7 +15,7 @@ interface Props {
 
 const ListingDetails: FC<Props> = ({ route: { params } }) => (
   <Container>
-    <Image source={{ uri: params.images[0].url }} />
+    <Image preview={{ uri: params.images[0].thumbnailUrl }} tint="light" uri={params.images[0].url} />
 
     <Details>
       <Title>{params.title}</Title>
