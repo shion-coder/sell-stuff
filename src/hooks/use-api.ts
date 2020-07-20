@@ -1,24 +1,21 @@
 import { useState } from 'react';
-import { ApiResponse } from 'apisauce';
 
 /* -------------------------------------------------------------------------- */
 
-export const useApi = <T>(apiFunc: () => Promise<ApiResponse<T[], T[]>>) => {
-  const [data, setData] = useState<T[]>([]);
+export const useApi = <T, U = T>(apiFunc: (value?: any) => any) => {
+  const [data, setData] = useState<T>();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const request = async () => {
+  const request = async (...args: any[]) => {
     setLoading(true);
-    const response = await apiFunc();
+    const response = await apiFunc(...args);
     setLoading(false);
 
-    if (!response.ok) {
-      return setError(true);
-    }
-
-    setError(false);
+    setError(!response.ok);
     setData(response.data!);
+
+    return response;
   };
 
   return { data, error, loading, request };

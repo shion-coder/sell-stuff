@@ -8,7 +8,7 @@ import { Container, Text } from './offline-notice.styles';
 const OfflineNotice: FC = () => {
   const netInfo = useNetInfo();
 
-  return netInfo.type !== 'unknown' && !netInfo.isInternetReachable ? (
+  return netInfo.type !== 'unknown' && netInfo.isInternetReachable === false ? (
     <Container>
       <Text>No Internet Connection</Text>
     </Container>

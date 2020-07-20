@@ -21,23 +21,24 @@ interface Props {
 }
 
 const Listings: FC<Props> = ({ navigation }) => {
-  const { data: listings, error, loading, request: loadListings } = useApi<ListingItem>(getListings);
+  const { data: listings, error, loading, request: loadListings } = useApi<ListingItem[]>(getListings);
 
   useEffect(() => {
     loadListings();
   }, []);
 
   return (
-    <Screen>
-      <Container>
-        {error ? (
-          <>
-            <CustomText>Couldn't retrieve the listings.</CustomText>
-            <CustomButton title="Retry" onPress={loadListings} />
-          </>
-        ) : (
-          <>
-            <ActivityIndicator visible={loading} />
+    <>
+      <ActivityIndicator visible={loading} />
+
+      <Screen>
+        <Container>
+          {error ? (
+            <>
+              <CustomText>Couldn't retrieve the listings.</CustomText>
+              <CustomButton title="Retry" onPress={loadListings} />
+            </>
+          ) : (
             <FlatList
               data={listings}
               keyExtractor={(listing) => listing.id.toString()}
@@ -51,10 +52,10 @@ const Listings: FC<Props> = ({ navigation }) => {
                 />
               )}
             />
-          </>
-        )}
-      </Container>
-    </Screen>
+          )}
+        </Container>
+      </Screen>
+    </>
   );
 };
 

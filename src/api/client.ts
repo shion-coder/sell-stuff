@@ -1,11 +1,18 @@
 import { create } from 'apisauce';
 
 import cache from 'utils';
+import { getToken } from 'context';
 
 /* -------------------------------------------------------------------------- */
 
 const client = create({
   baseURL: 'http://172.20.10.3:9000/api',
+});
+
+client.addAsyncRequestTransform(async (request) => {
+  const token = await getToken();
+
+  if (token) request.headers['x-auth-token'] = token;
 });
 
 const get = client.get;
