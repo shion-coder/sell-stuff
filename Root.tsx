@@ -2,7 +2,7 @@ import React, { FC, useContext, useState } from 'react';
 import { AppLoading } from 'expo';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { navigationTheme, AppNavigator, AuthNavigator } from 'navigation';
+import { navigationTheme, AppNavigator, AuthNavigator, navigationRef } from 'navigation';
 import { AuthContext, getUser } from 'context';
 
 import OfflineNotice from 'components/offline-notice';
@@ -25,7 +25,9 @@ const Root: FC = () => {
     <>
       <OfflineNotice />
 
-      <NavigationContainer theme={navigationTheme}>{user ? <AppNavigator /> : <AuthNavigator />}</NavigationContainer>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+        {user ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
     </>
   );
 };
